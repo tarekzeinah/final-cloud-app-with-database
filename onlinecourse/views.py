@@ -141,13 +141,14 @@ def extract_answers(request):
         # For each selected choice, check if it is a correct answer or not
         # Calculate the total score
 def show_exam_result(request, course_id, submission_id):
-    total_score = 0
+    context = {}
+    context['total_score'] = 0
     course = Course.objects.get(id=course_id)
     submission = Submission.objects.get(id=submission_id)
     for choice in submission.choices:
         if choice.is_correct == True:
-            total_score += choice.grade
-    return render('exam_result_bootstrap.html', context['total_score'] = total_score)
+            context['total_score'] += choice.grade
+    return render('exam_result_bootstrap.html', context)
     
 
 
